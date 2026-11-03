@@ -29,7 +29,7 @@ jobs:
   # Job 1: Lint y Verificación de Formato (Biome + TypeScript)
   # ----------------------------------------------------------------------------
   lint:
-    name: Lint & Format Check
+    name: Biome
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -41,13 +41,9 @@ jobs:
       - name: Setup Bun env
         uses: ./.github/actions/setup
 
-      # 3. Ejecuta el linter de Biome
-      - name: Lint con Biome
-        run: bun run lint
-
-      # 4. Verifica formato con Biome
-      - name: Format check con Biome
-        run: bun run check
+      # 3. Lint y formato en una sola pasada, sin escribir archivos
+      - name: Biome CI
+        run: bunx biome ci .
 
       # 5. Verifica tipado estricto con TypeScript
       - name: TypeScript type check
@@ -131,8 +127,7 @@ jobs:
 
       # 4. Publica en Cloudflare Pages usando Wrangler Action
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/ --project-name=fluxbeats
+        run: bunx wrangler pages deploy dist/ --project-name=fluxbeats --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
