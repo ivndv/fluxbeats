@@ -30,7 +30,7 @@ jobs:
   # ----------------------------------------------------------------------------
   lint:
     name: Biome
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, arm64]
     timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
@@ -54,7 +54,7 @@ jobs:
   # ----------------------------------------------------------------------------
   unit:
     name: Tests Unitarios (Vitest)
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, arm64]
     timeout-minutes: 15
     steps:
       # 1. Clona el repositorio
@@ -75,7 +75,7 @@ jobs:
   e2e:
     name: Suite E2E (Playwright)
     needs: [lint, unit]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, arm64]
     timeout-minutes: 30
     steps:
       # 1. Clona el repositorio
@@ -108,7 +108,7 @@ jobs:
     name: Despliegue en Cloudflare Pages
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [lint, unit, e2e]
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, arm64]
     timeout-minutes: 20
     steps:
       # 1. Clona el código
