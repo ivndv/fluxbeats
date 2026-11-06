@@ -1,34 +1,24 @@
-# AGENTS.md — Guía para Agentes en Fluxbeats
+# AGENTS.md — Fluxbeats
 
-Guía operativa y técnica para agentes de Inteligencia Artificial que colaboren en el desarrollo, mantenimiento y optimización del proyecto **Fluxbeats**.
+Guía operativa y técnica para agentes de Inteligencia Artificial que colaboren en el desarrollo, mantenimiento y optimización de **Fluxbeats**.
 
----
-
-## 1. Visión General del Proyecto
+## 1. Visión general
 
 **Fluxbeats** es una landing page interactiva diseñada para la exhibición, streaming y presentación del catálogo de beats y licencias a clientes.
 
-* **Propósito:** Ofrecer a productores, artistas y clientes un catálogo interactivo con reproductor de audio continuo, tabla comparativa de licencias comerciales y un formulario de contacto seguro protegido contra spam para consultas y cotizaciones directas.
-* **Dominio en Producción:** [https://fluxbeats.mgdc.site](https://fluxbeats.mgdc.site)
-* **CDN de Assets (Cloudflare R2):** `https://assets.mgdc.site/fluxbeats`
+- **Propósito:** ofrecer a productores, artistas y clientes un catálogo interactivo con reproductor de audio continuo, tabla comparativa de licencias comerciales y un formulario de contacto seguro protegido contra spam para consultas y cotizaciones directas.
+- **Dominio en producción:** [https://fluxbeats.mgdc.site](https://fluxbeats.mgdc.site)
+- **CDN de assets (Cloudflare R2):** `https://assets.mgdc.site/fluxbeats`
 
----
+## 2. Antes de tocar código
 
-## 2. Antes de Tocar Código (Contexto con CodeGraph)
+**CodeGraph** (índice de símbolos del repo): usa `codegraph_explore` (`query`, `maxFiles`, `projectPath`) antes de un grep masivo o de leer varios archivos; devuelve fuente verbatim, rutas de llamada e impacto.
 
-* **Uso del MCP CodeGraph:** Antes de hacer búsquedas masivas de texto o inspeccionar múltiples archivos a ciegas, invoca la herramienta `codegraph_explore` para obtener el árbol de llamadas y el código fuente verbatim de los símbolos en una sola llamada eficiente.
-* **Estado y Sincronización:**
-  ```bash
-  # Verificar el estado del índice
-  codegraph status /home/ivan/software-dev/fluxbeats
+- `codegraph sync /home/ivan/software-dev/fluxbeats` tras editar, pull o cambiar de rama (incremental, uso normal).
+- `codegraph index /home/ivan/software-dev/fluxbeats` solo al crear el índice, tras `codegraph upgrade` o si `status` avisa `built by vX` (rebuild completo).
+- `codegraph status /home/ivan/software-dev/fluxbeats` para comprobar el estado.
 
-  # Sincronizar cambios en el árbol de archivos
-  codegraph sync /home/ivan/software-dev/fluxbeats
-  ```
-
----
-
-## 3. Stack Tecnológico
+## 3. Stack tecnológico
 
 | Capa | Tecnología | Versión / Detalle |
 | :--- | :--- | :--- |
@@ -52,11 +42,9 @@ Guía operativa y técnica para agentes de Inteligencia Artificial que colaboren
 | **Infra & Edge** | **Cloudflare Pages, Workers & R2** | `wrangler ^4.129.0` (`wrangler.jsonc`) |
 | **CI/CD** | **GitHub Actions** | Workflows modulares y composite actions en `.github/` |
 
----
+## 4. Estructura del código
 
-## 4. Estructura del Código
-
-```
+```plaintext
 fluxbeats/
 ├── functions/                     → Backend Serverless (Pages Functions)
 │   ├── _controllers/              → Controladores desacoplados de peticiones
@@ -115,9 +103,28 @@ fluxbeats/
 └── wrangler.jsonc                 → Configuración de Cloudflare Pages
 ```
 
----
+## 5. Arquitectura y flujo de datos
 
-## 5. Comandos de Desarrollo y Tooling
+### 5.1 Frontend
+
+- SPA React 19 con Vite; `App.tsx` monta el layout principal, las rutas y el elemento de audio global.
+- Estado global con Zustand: `appStore.ts` compone los slices `audioSlice.ts` y `uiSlice.ts`.
+- Los componentes se agrupan por sección y los recursos se sirven desde el CDN de R2.
+
+### 5.2 Backend
+
+- `functions/api/[[route]].ts` es el entry point de Hono y expone `POST /api/contact`.
+- `contactController.ts` orquesta la validación Zod, el rate limiter por IP, la verificación Turnstile y el envío con Resend mediante inyección de dependencias.
+- La lógica de negocio reside en `functions/_services/` e implementa interfaces de `functions/_shared/types.ts`.
+
+## 6. Variables de entorno
+
+`.env.example` declara los nombres de las variables. No se documentan valores.
+
+- **Frontend:** `VITE_TURNSTILE_SITE_KEY`.
+- **Pages Functions:** `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `CONTACT_EMAIL`, `TURNSTILE_SECRET_KEY`.
+
+## 7. Comandos
 
 Todos los comandos se ejecutan con **Bun**:
 
@@ -133,54 +140,61 @@ bun run build
 
 # Verificación y formateo con Biome
 bun run check
+
+# Linter con Biome
 bun run lint
+
+# Formateo con Biome
 bun run format
 
-# Pruebas Unitarias (Vitest - 80 tests)
+# Pruebas unitarias (Vitest - 80 tests)
 bun run test:unit
+
+# Interfaz de Vitest
 bun run test:ui
 
-# Pruebas de Humo (Playwright)
+# Pruebas de humo (Playwright)
 bun run test:smoke
 
 # Pruebas End-to-End (Playwright)
 bun run test:e2e
 
-# Pruebas de Accesibilidad WCAG 2.1 AA (Axe-core)
+# Pruebas de accesibilidad WCAG 2.1 AA (Axe-core)
 bun run test:a11y
 
-# Pruebas de Regresión Visual (Playwright)
+# Pruebas de regresión visual (Playwright)
 bun run test:visual
+
+# Actualizar baselines visuales
 bun run test:visual:update
 
-# Auditoría de Seguridad (Snyk)
+# Auditoría de seguridad (Snyk)
 bun run snyk:test
 ```
 
----
+## 8. Convenciones y reglas críticas
 
-## 6. Convenciones Obligatorias para Agentes
+### 8.1 Regla de oro en ejecución de tests
 
-### 6.1 Regla de Oro en Ejecución de Tests
-* **NO ejecutar comandos de test de forma reactiva tras cada pequeño cambio.** Realizar todos los cambios de código primero y acumularlos; correr las suites de pruebas únicamente al final cuando todo el conjunto esté listo y verificado.
+- **NO ejecutar comandos de test de forma reactiva tras cada pequeño cambio.** Realiza todos los cambios de código primero y acumúlalos; corre las suites de pruebas únicamente al final, cuando todo el conjunto esté listo y verificado.
 
-### 6.2 Estilo de Código y Comentarios
-* **Lenguaje:** Todo el código, comentarios y documentación deben escribirse en **español**.
-* **Comentarios de 1 sola línea:** Concisos, directos y explicativos del *por qué*, sin bloques redundantes ni tecnicismos innecesarios.
-* **Tipado estricto:** Prohibido el uso de `any`; definir interfaces explícitas para props, estados y modelos de datos.
-* **Imports limpios:** Utilizar siempre el alias `@/` configurado para módulos bajo `src/`.
+### 8.2 Estilo de código y comentarios
 
-### 6.3 Accesibilidad Web (WCAG 2.1 AA)
-* Todos los elementos interactivos (botones, sliders, selectores) deben poseer un `aria-label` descriptivo o texto oculto para lectores de pantalla (`<span className="sr-only">`).
-* Mantener un contraste de color superior a **4.5:1** tanto en modo oscuro como en modo claro (ej. `--accent-hover: #60a5fa` sobre fondos oscuros).
-* En tests de Axe-core, permitir que las animaciones de CSS terminen de renderizarse antes de disparar el análisis (`waitForTimeout(600)`) para evitar falsos positivos de contraste.
+- **Lenguaje:** todo el código, comentarios y documentación deben escribirse en **español**.
+- **Comentarios de una sola línea:** concisos, directos y explicativos del *por qué*, sin bloques redundantes ni tecnicismos innecesarios.
+- **Tipado estricto:** prohibido el uso de `any`; define interfaces explícitas para props, estados y modelos de datos.
+- **Imports limpios:** utiliza siempre el alias `@/` configurado para módulos bajo `src/`.
 
-### 6.4 Backend y Arquitectura Desacoplada
-* La lógica de negocio reside en `functions/_services/` implementando interfaces de `functions/_shared/types.ts`.
-* El controlador `contactController.ts` orquesta la validación Zod, el rate limiter por IP, la verificación Turnstile y el envío con Resend mediante inyección de dependencias para facilitar pruebas unitarias aisladas.
+### 8.3 Accesibilidad web (WCAG 2.1 AA)
 
-### 6.5 Flujo de Git y Despliegues
-* **PROHIBIDO realizar commits o push sin la aprobación explícita del usuario.**
-* **Flujo de trabajo:** Todo desarrollo o refactorización se realiza en la rama `develop` y se mergea hacia `main` mediante fast-forward una vez validado.
-* **Mensajes de commit:** Seguir *Conventional Commits* en minúsculas y español (ej. `feat: ...`, `fix: ...`, `refactor: ...`, `test: ...`, `docs: ...`).
-* **Documentación:** El directorio `docs/` se mantiene estrictamente en `.gitignore`; la documentación pública vive en Notion o en `README.md`.
+- Todos los elementos interactivos (botones, sliders, selectores) deben poseer un `aria-label` descriptivo o texto oculto para lectores de pantalla (`<span className="sr-only">`).
+- Mantener un contraste de color superior a **4.5:1** tanto en modo oscuro como en modo claro (ej. `--accent-hover: #60a5fa` sobre fondos oscuros).
+- En tests de Axe-core, permitir que las animaciones de CSS terminen de renderizarse antes de disparar el análisis (`waitForTimeout(600)`) para evitar falsos positivos de contraste.
+
+## 9. Flujo de Git y despliegue
+
+- **PROHIBIDO realizar commits o push sin la aprobación explícita del usuario.**
+- **Flujo de trabajo:** todo desarrollo o refactorización se realiza en la rama `develop` y se mergea hacia `main` mediante fast-forward una vez validado y aprobado.
+- **Mensajes de commit:** seguir *Conventional Commits* en minúsculas y español (ej. `feat: ...`, `fix: ...`, `refactor: ...`, `test: ...`, `docs: ...`).
+- **Documentación:** el directorio `docs/` se mantiene estrictamente en `.gitignore`; la documentación pública vive en Notion o en `README.md`.
+- **Despliegue:** Cloudflare Pages, Workers y R2; la configuración vive en `wrangler.jsonc`.
