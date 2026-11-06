@@ -10,7 +10,7 @@ const mockBeat: Beat = {
 	bpm: 140,
 	key: "C Minor",
 	price: 30,
-	audioUrl: "https://assets.mgdc.site/fluxbeats/winter.mp3",
+	audioUrl: "https://assets.liuma.app/fluxbeats/winter.mp3",
 	image: "winter.png",
 };
 

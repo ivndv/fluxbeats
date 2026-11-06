@@ -7,8 +7,8 @@ Guía operativa y técnica para agentes de Inteligencia Artificial que colaboren
 **Fluxbeats** es una landing page interactiva diseñada para la exhibición, streaming y presentación del catálogo de beats y licencias a clientes.
 
 - **Propósito:** ofrecer a productores, artistas y clientes un catálogo interactivo con reproductor de audio continuo, tabla comparativa de licencias comerciales y un formulario de contacto seguro protegido contra spam para consultas y cotizaciones directas.
-- **Dominio en producción:** [https://fluxbeats.mgdc.site](https://fluxbeats.mgdc.site)
-- **CDN de assets (Cloudflare R2):** `https://assets.mgdc.site/fluxbeats`
+- **Dominio en producción:** [https://fluxbeats.liuma.app](https://fluxbeats.liuma.app)
+- **CDN de assets (Cloudflare R2):** `https://assets.liuma.app/fluxbeats`
 
 ## 2. Antes de tocar código
 

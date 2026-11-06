@@ -23,7 +23,7 @@ Landing page moderna diseñada para exhibir instrumentales y presentar un catál
 
 ## Uso
 
-- **Visualizar Contenido**: La plataforma ya está activa y puedes explorarla aquí: [Fluxbeats](https://fluxbeats.mgdc.site/).
+- **Visualizar Contenido**: La plataforma ya está activa y puedes explorarla aquí: [Fluxbeats](https://fluxbeats.liuma.app/).
 - **Escuchar Pistas**: Desplázate al catálogo de instrumentales y pulsa reproducir; el reproductor inferior permite pausar, ajustar volumen y adelantar la pista.
 - **Adquirir Licencias**: Selecciona el plan adecuado y contacta directamente a través del formulario para coordinar la entrega.
 - **Enviar Mensaje**: Completa el formulario de contacto con tu nombre, correo y detalles de tu consulta o solicitud; el sistema valida la seguridad y procesa el envío de inmediato.
@@ -42,7 +42,7 @@ Landing page moderna diseñada para exhibir instrumentales y presentar un catál
 
 ## Despliegue
 
-La plataforma está construida para ofrecer la máxima velocidad con streaming de baja latencia y se encuentra desplegada de forma global a través de Cloudflare Pages. Puedes usarla directamente aquí: [Fluxbeats](https://fluxbeats.mgdc.site/)
+La plataforma está construida para ofrecer la máxima velocidad con streaming de baja latencia y se encuentra desplegada de forma global a través de Cloudflare Pages. Puedes usarla directamente aquí: [Fluxbeats](https://fluxbeats.liuma.app/)
 
 ## Licencia
 
