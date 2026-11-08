@@ -22,5 +22,14 @@ export default defineConfig({
 
 		// Excluye dependencias, artefactos de build y suites E2E/Smoke de Playwright
 		exclude: ["node_modules", "dist", "tests/**"],
+
+		// Cobertura de unitarios sobre frontend y Pages Functions
+		coverage: {
+			provider: "v8",
+			reporter: ["text", "html", "lcov"],
+			reportsDirectory: "./coverage",
+			include: ["src/**/*.{ts,tsx}", "functions/**/*.ts"],
+			exclude: ["**/*.test.*", "**/*.d.ts", "src/test/**", "src/main.tsx"],
+		},
 	},
 });
