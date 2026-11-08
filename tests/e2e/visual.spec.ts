@@ -29,7 +29,9 @@ test.describe("E2E: Regresión Visual (Snapshots de UI)", () => {
 		await expect(hero).toHaveScreenshot("hero-theme-default.png");
 
 		// 3. Alterna el tema visual
-		const themeBtn = page.getByRole("button", { name: /toggle theme|cambiar tema/i });
+		const themeBtn = page.getByRole("button", {
+			name: /toggle theme|cambiar tema/i,
+		});
 		await themeBtn.click();
 
 		// 4. Snapshot con el tema alternado
