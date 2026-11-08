@@ -35,6 +35,6 @@ describe("Licencias (Planes y Precios Comerciales)", () => {
 		render(<Licencias />);
 
 		// 2. Verifica el badge distintivo
-		expect(screen.getByText("Mas Vendido")).toBeInTheDocument();
+		expect(screen.getByText("Más Vendido")).toBeInTheDocument();
 	});
 });

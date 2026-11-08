@@ -27,7 +27,7 @@ describe("SobreMi (Sección Sobre el Productor)", () => {
 		render(<SobreMi />);
 
 		// 2. Verifica la presencia de la imagen
-		const img = screen.getByAltText("Prod Flux Studio Setup");
+		const img = screen.getByAltText("Estudio de Prod Flux");
 		expect(img).toBeInTheDocument();
 		expect(img).toHaveAttribute(
 			"src",

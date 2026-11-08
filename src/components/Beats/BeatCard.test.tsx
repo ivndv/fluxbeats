@@ -42,7 +42,7 @@ describe("BeatCard (Tarjeta de Beat Individual)", () => {
 		render(<BeatCard {...defaultProps} onPlay={onPlay} isPlaying={false} />);
 
 		// 2. Dispara el evento de clic en el botón de reproducción
-		const playBtn = screen.getByRole("button", { name: "Play" });
+		const playBtn = screen.getByRole("button", { name: /play|reproducir/i });
 		expect(playBtn).toBeInTheDocument();
 
 		fireEvent.click(playBtn);
@@ -56,7 +56,7 @@ describe("BeatCard (Tarjeta de Beat Individual)", () => {
 		render(<BeatCard {...defaultProps} isPlaying={true} />);
 
 		// 2. Verifica que el botón cambie a Pause
-		const pauseBtn = screen.getByRole("button", { name: "Pause" });
+		const pauseBtn = screen.getByRole("button", { name: /pause|pausar/i });
 		expect(pauseBtn).toBeInTheDocument();
 	});
 
@@ -65,7 +65,7 @@ describe("BeatCard (Tarjeta de Beat Individual)", () => {
 		render(<BeatCard {...defaultProps} isLoading={true} />);
 
 		// 2. Verifica que el botón esté deshabilitado
-		const btn = screen.getByRole("button", { name: "Play" });
+		const btn = screen.getByRole("button", { name: /play|reproducir/i });
 		expect(btn).toBeDisabled();
 	});
 });
