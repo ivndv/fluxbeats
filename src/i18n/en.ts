@@ -6,37 +6,89 @@ export const en = {
 		reviews: "Reviews",
 		about: "About Me",
 		contact: "Contact",
+		openMenu: "Open menu",
+		closeMenu: "Close menu",
+		changeLanguage: "Change language",
+		language: "Language",
+		toggleTheme: "Toggle theme",
 	},
 	hero: {
 		title: "Beats that flow with your content.",
 		subtitle: "Sounds for Creators.",
 		cta1: "Explore Beats",
 		cta2: "Explore Licenses",
+		kicker: "Fluxbeats — Studio",
+		tracks: "Tracks",
+		bpm: "BPM",
+		audio: "Audio",
+		featured: "Featured",
+		catalog: "Catalog",
+		playFeatured: "Play",
+		marquee: [
+			"LO-FI",
+			"CHILLHOP",
+			"BOOM BAP",
+			"78–95 BPM",
+			"24-BIT",
+			"MP3 LEASE",
+			"WAV PREMIUM",
+			"UNLIMITED TRACKOUT",
+			"STEMS",
+			"CUSTOM BEATS",
+			"DEALS",
+		],
 	},
 	beats: {
 		title: "Recent Catalog",
 		subtitle: "Explore our latest releases.",
 		buy: "Buy",
+		eyebrow: "Catalog",
+		prev: "Previous",
+		next: "Next",
 	},
 	licenses: {
 		header: "Transparent Pricing",
 		title: "Choose the perfect license for your project",
 		subtitle: "No surprises. You keep 100% of your royalties.",
 		popular: "Best Seller",
+		perBeat: "/beat",
 		options: {
 			basic: {
 				name: "MP3 Lease",
 				desc: "Perfect for starting demos and YouTube videos.",
+				features: [
+					"High-quality MP3 file",
+					"50,000 streams on Spotify/Apple",
+					"Monetized YouTube videos",
+					"No voice tag (Untagged)",
+					"Limited distribution",
+				],
 				cta: "Select",
 			},
 			premium: {
 				name: "WAV Premium",
 				desc: "Studio quality for professional content.",
+				features: [
+					"WAV + MP3 file",
+					"500,000 streams on Spotify/Apple",
+					"Unlimited YouTube videos",
+					"Radio rotation",
+					"No voice tag (Untagged)",
+					"PDF contract included",
+				],
 				cta: "Choose this",
 			},
 			unlimited: {
 				name: "Unlimited Trackout",
 				desc: "Full control over mixing and distribution.",
+				features: [
+					"Stems (separated tracks)",
+					"WAV + MP3 files",
+					"Unlimited streams",
+					"Unlimited monetization",
+					"Commercial projects",
+					"No voice tag (Untagged)",
+				],
 				cta: "Professional License",
 			},
 		},
@@ -45,12 +97,37 @@ export const en = {
 		header: "What creators are saying",
 		subtitle:
 			"Artists and producers who have elevated their sound with Fluxbeats.",
+		eyebrow: "Reviews",
+		avatarAlt: "Avatar of",
+		items: [
+			{
+				content:
+					"The audio quality is insane. I bought the WAV license and the mix came out crystal clear on Spotify. 100% recommended for serious artists.",
+				author: "Carlos 'Flow' Ruiz",
+				role: "Urban Artist",
+				rating: 5,
+			},
+			{
+				content:
+					"I spent months looking for Lofi beats that didn't sound generic. Fluxbeats has that organic sound my Twitch streams were missing.",
+				author: "Sofía Streamz",
+				role: "Content Creator",
+				rating: 4,
+			},
+			{
+				content:
+					"The purchase process was super fast. I downloaded the stems instantly and the contract was crystal clear. I'll definitely buy again!",
+				author: "Prod. Javi",
+				role: "Mixing Engineer",
+				rating: 4,
+			},
+		],
 	},
 	about: {
 		title: "Prod. Flux",
 		headline: "More than just music, creating atmospheres.",
 		p1: "Hi, I'm Flux. My obsession isn't just making beats, it's designing the perfect \"vibe\" so your content stands out.",
-		p2: 'I started combining my passion for code and music ("Vibe Coding"), looking for that Lofi and Chillhop sound that allows you to focus, relax, or create without distractions.',
+		p2: "I started blending code and music, chasing that Lofi and Chillhop sound that lets you focus, relax, or create without distractions.",
 		p3: "Every beat in this catalog has been mixed and mastered thinking about how it will sound on your Twitch stream or YouTube video.",
 		stats: {
 			years: "Years producing",
@@ -59,8 +136,10 @@ export const en = {
 			quality: "Audio Quality",
 		},
 		quote: '"Sound is 50% of the visual experience."',
+		imageAlt: "Prod Flux studio setup",
 	},
 	contact: {
+		eyebrow: "Contact",
 		title: "Let's talk about your project",
 		subtitle:
 			"Have questions about licenses? Need an exclusive Custom Beat? Or just want to say hi. I'm one message away.",
@@ -74,6 +153,9 @@ export const en = {
 			subject: "Subject",
 			message: "Message",
 			submit: "Send Message",
+			sending: "Sending...",
+			success: "Message sent successfully. We'll get back to you soon.",
+			error: "Error sending the message",
 			options: {
 				license: "License Information",
 				custom: "Custom Beat",
@@ -83,6 +165,8 @@ export const en = {
 		},
 	},
 	footer: {
+		navigation: "Navigation",
+		legalTitle: "Legal",
 		about:
 			"High-quality beats for content creators, streamers, and artists. Lofi, Chillhop, and Boom Bap styles.",
 		rights: "All rights reserved.",
@@ -97,7 +181,27 @@ export const en = {
 			title: "Subscribe for offers",
 			placeholder: "Your email",
 			button: "Subscribe",
+			invalid: "Invalid email",
+			success: "Thanks for subscribing!",
 		},
+	},
+	player: {
+		progress: "Track progress",
+		play: "Play",
+		pause: "Pause",
+		volume: "Volume control",
+		close: "Close player",
+	},
+	seo: {
+		title: "Fluxbeats — Lofi & Chillhop Beats for Content Creators",
+		description:
+			"High-quality Lofi and Chillhop beats for content creators, artists, and streamers. Flexible licenses and professional 24-bit audio.",
+		keywords:
+			"beats, lofi, chillhop, music for streams, beats for youtube, music licenses, music production",
+		ogTitle: "Fluxbeats — Lofi & Chillhop Beats",
+		ogDescription:
+			"High-quality beats for your content. Flexible licenses and professional audio.",
+		locale: "en_US",
 	},
 	legalPages: {
 		terms: {

@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 // Componentes
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+// Hooks
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import Home from "@/pages/Home/Home";
 import Privacy from "@/pages/legal/Privacy";
 import Terms from "@/pages/legal/Terms";
@@ -14,6 +16,9 @@ import { useStore } from "@/store/appStore";
 // Componente raíz con routing, layout y reproductor de audio global
 function App() {
 	const initAudio = useStore((s) => s.initAudio);
+
+	// Mantiene título, metadatos y lang alineados con el idioma
+	useDocumentMeta();
 
 	useEffect(() => {
 		// 1. Inicializa el reproductor de audio al montar la aplicación
