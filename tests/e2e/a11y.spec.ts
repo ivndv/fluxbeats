@@ -33,7 +33,9 @@ test.describe("E2E: Accesibilidad Web (a11y - WCAG 2.1 AA)", () => {
 		expect(initialResults.violations).toEqual([]);
 
 		// 2. Alterna al siguiente tema visual y espera la transición de color
-		const themeBtn = page.getByRole("button", { name: /toggle theme/i });
+		const themeBtn = page.getByRole("button", {
+			name: /toggle theme|cambiar tema/i,
+		});
 		await themeBtn.click();
 		await page.waitForTimeout(350);
 
@@ -50,7 +52,9 @@ test.describe("E2E: Accesibilidad Web (a11y - WCAG 2.1 AA)", () => {
 	}) => {
 		// 1. Inicia la reproducción del primer beat
 		const firstPlayBtn = page
-			.locator('#beats button[aria-label="Play"]')
+			.locator(
+				'#beats button[aria-label="Play"], #beats button[aria-label="Reproducir"]',
+			)
 			.first();
 		await firstPlayBtn.click({ force: true });
 

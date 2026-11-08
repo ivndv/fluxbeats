@@ -33,6 +33,7 @@ export default defineConfig({
 	// Opciones compartidas del navegador
 	use: {
 		baseURL: "http://localhost:4321",
+		locale: "es-ES",
 		trace: "retain-on-failure",
 		screenshot: "only-on-failure",
 		video: "retain-on-failure",

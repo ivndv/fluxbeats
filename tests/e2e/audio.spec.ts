@@ -16,7 +16,7 @@ test.describe("E2E: Reproductor Continuo de Audio", () => {
 
 		// 2. Hace clic en el primer botón de reproducción
 		const firstPlayBtn = beatSection
-			.locator('button[aria-label="Play"]')
+			.locator('button[aria-label="Play"], button[aria-label="Reproducir"]')
 			.first();
 		await firstPlayBtn.click({ force: true });
 
@@ -34,7 +34,9 @@ test.describe("E2E: Reproductor Continuo de Audio", () => {
 	}) => {
 		// 1. Inicia la reproducción del primer beat
 		const firstPlayBtn = page
-			.locator('#beats button[aria-label="Play"]')
+			.locator(
+				'#beats button[aria-label="Play"], #beats button[aria-label="Reproducir"]',
+			)
 			.first();
 		await firstPlayBtn.click({ force: true });
 
@@ -62,7 +64,9 @@ test.describe("E2E: Reproductor Continuo de Audio", () => {
 	}) => {
 		// 1. Inicia la reproducción
 		const firstPlayBtn = page
-			.locator('#beats button[aria-label="Play"]')
+			.locator(
+				'#beats button[aria-label="Play"], #beats button[aria-label="Reproducir"]',
+			)
 			.first();
 		await firstPlayBtn.click({ force: true });
 

@@ -11,11 +11,13 @@ test.describe("E2E: Internacionalización (i18n) y Tema Visual", () => {
 		page,
 	}) => {
 		// 1. Abre el selector de idioma
-		const langBtn = page.getByRole("button", { name: /change language/i });
+		const langBtn = page.getByRole("button", {
+			name: /change language|cambiar idioma/i,
+		});
 		await langBtn.click();
 
 		// 2. Selecciona la opción English
-		const enOption = page.getByRole("button", { name: "English" });
+		const enOption = page.getByRole("menuitemradio", { name: "English" });
 		await enOption.click();
 
 		// 3. Comprueba que los textos clave hayan cambiado a inglés
@@ -24,7 +26,7 @@ test.describe("E2E: Internacionalización (i18n) y Tema Visual", () => {
 		).toBeVisible();
 		await expect(
 			page.getByRole("heading", {
-				name: /pricing & licenses|transparent pricing/i,
+				name: /choose the perfect license/i,
 			}),
 		).toBeVisible();
 	});
@@ -36,7 +38,9 @@ test.describe("E2E: Internacionalización (i18n) y Tema Visual", () => {
 		const html = page.locator("html");
 
 		// 2. Hace clic en el botón de alternar tema
-		const themeBtn = page.getByRole("button", { name: /toggle theme/i });
+		const themeBtn = page.getByRole("button", {
+			name: /toggle theme|cambiar tema/i,
+		});
 		await themeBtn.click();
 
 		// 3. Comprueba que se agregue la clase .dark

@@ -29,7 +29,7 @@ test.describe("E2E: Regresión Visual (Snapshots de UI)", () => {
 		await expect(hero).toHaveScreenshot("hero-theme-default.png");
 
 		// 3. Alterna el tema visual
-		const themeBtn = page.getByRole("button", { name: /toggle theme/i });
+		const themeBtn = page.getByRole("button", { name: /toggle theme|cambiar tema/i });
 		await themeBtn.click();
 
 		// 4. Snapshot con el tema alternado
@@ -53,7 +53,9 @@ test.describe("E2E: Regresión Visual (Snapshots de UI)", () => {
 	}) => {
 		// 1. Dispara la reproducción del primer beat
 		const firstPlayBtn = page
-			.locator('#beats button[aria-label="Play"]')
+			.locator(
+				'#beats button[aria-label="Play"], #beats button[aria-label="Reproducir"]',
+			)
 			.first();
 		await firstPlayBtn.click({ force: true });
 
