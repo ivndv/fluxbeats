@@ -10,7 +10,7 @@ const Privacy: FC = () => {
 	const t = useT();
 
 	return (
-		<div className="min-h-screen bg-page-bg pt-32 pb-16 transition-colors duration-300">
+		<div className="min-h-screen bg-page-bg pt-28 pb-16 transition-colors duration-300">
 			<div className="mx-auto max-w-3xl px-6 lg:px-8">
 				{/* Enlace para volver al inicio */}
 				<Link
@@ -19,7 +19,7 @@ const Privacy: FC = () => {
 				>
 					&larr; {t.footer.backToHome}
 				</Link>
-				<h1 className="text-4xl font-bold tracking-tight text-text-main mb-8">
+				<h1 className="text-3xl font-bold tracking-tight text-text-main mb-8 sm:text-4xl">
 					{t.legalPages.privacy.title}
 				</h1>
 				{/* Secciones de política de privacidad */}

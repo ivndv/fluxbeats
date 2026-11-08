@@ -1,21 +1,20 @@
-// Iconos
-import { Moon, Sun } from "lucide-react";
-// Store
-import { useStore } from "@/store/appStore";
+import { LunaIcono, SolIcono } from "@/components/ui/HeaderIcons";
+import { useStore, useT } from "@/store/appStore";
 
 // Botón que alterna entre tema claro y oscuro
 const ThemeSelector = () => {
 	const theme = useStore((s) => s.theme);
 	const toggleTheme = useStore((s) => s.toggleTheme);
+	const t = useT();
 
 	return (
 		<button
 			type="button"
 			onClick={toggleTheme}
-			className="rounded-full p-2 text-text-muted transition-colors hover:text-accent dark:hover:text-accent"
-			aria-label="Toggle theme"
+			className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface-card/70 text-text-muted transition-colors hover:border-accent hover:text-accent"
+			aria-label={t.header.toggleTheme}
 		>
-			{theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+			{theme === "light" ? <LunaIcono /> : <SolIcono />}
 		</button>
 	);
 };

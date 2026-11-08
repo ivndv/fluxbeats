@@ -13,6 +13,8 @@ import {
 import type { FC } from "react";
 // Tipos
 import type { Beat } from "@/data/beats";
+// Store
+import { useT } from "@/store/appStore";
 // Utilidades
 import { formatTime } from "@/utils/time";
 
@@ -55,10 +57,12 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 	onVolumeChange,
 	onSeek,
 }) => {
+	const t = useT();
+
 	if (!currentBeat) return null;
 
 	return (
-		<div className="fixed bottom-0 left-0 w-full z-[100] bg-surface-card border-t border-border shadow-2xl transition-colors duration-300">
+		<div className="fixed bottom-0 left-0 w-full z-[100] border-t border-border bg-surface-card/95 backdrop-blur-md transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
 				{/* Barra de progreso */}
 				<div className="mb-3">
@@ -67,14 +71,14 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 						min="0"
 						max="100"
 						value={progress}
-						aria-label="Progreso de la pista"
+						aria-label={t.player.progress}
 						onChange={(e) => onSeek(Number(e.target.value))}
 						className="w-full h-1 bg-border rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:bg-accent-hover"
 						style={{
-							background: `linear-gradient(to right, rgb(37, 99, 235) 0%, rgb(37, 99, 235) ${progress}%, rgb(226, 232, 240) ${progress}%, rgb(226, 232, 240) 100%)`,
+							background: `linear-gradient(to right, var(--accent) 0%, var(--accent) ${progress}%, var(--border) ${progress}%, var(--border) 100%)`,
 						}}
 					/>
-					<div className="flex justify-between text-xs text-text-muted mt-1">
+					<div className="mt-1 flex justify-between font-mono text-[11px] text-text-muted">
 						<span>{formatTime(currentTime)}</span>
 						<span>{formatTime(duration)}</span>
 					</div>
@@ -87,8 +91,8 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 							type="button"
 							onClick={onToggle}
 							disabled={isLoading}
-							className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white shadow-md transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
-							aria-label={isPlaying ? "Pausar" : "Reproducir"}
+							className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-solid text-white transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+							aria-label={isPlaying ? t.player.pause : t.player.play}
 						>
 							{isLoading ? (
 								<LoaderCircle size={20} className="animate-spin" />
@@ -102,7 +106,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 							<p className="text-sm font-semibold text-text-main truncate">
 								{currentBeat.title}
 							</p>
-							<p className="text-xs text-text-muted">
+							<p className="font-mono text-[11px] uppercase tracking-wide text-text-muted">
 								{currentBeat.bpm} BPM | {currentBeat.key}
 							</p>
 						</div>
@@ -118,7 +122,7 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 								max="1"
 								step="0.01"
 								value={volume}
-								aria-label="Control de volumen"
+								aria-label={t.player.volume}
 								onChange={(e) => onVolumeChange(Number(e.target.value))}
 								className="w-20 h-1 bg-border rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-accent [&::-webkit-slider-thumb]:cursor-pointer hover:[&::-webkit-slider-thumb]:bg-accent-hover"
 							/>
@@ -127,8 +131,8 @@ export const MiniPlayer: FC<MiniPlayerProps> = ({
 						<button
 							type="button"
 							onClick={onClose}
-							className="text-text-muted hover:text-text-main p-2 rounded-full transition-colors"
-							aria-label="Cerrar reproductor"
+							className="flex h-10 w-10 items-center justify-center rounded-full text-text-muted transition-colors hover:text-text-main"
+							aria-label={t.player.close}
 						>
 							<X size={20} />
 						</button>

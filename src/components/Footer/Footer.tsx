@@ -17,7 +17,7 @@ const SocialIcon: FC<SocialIconProps> = ({ href, label, children }) => (
 	<a
 		href={href}
 		aria-label={label}
-		className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-card text-text-muted hover:bg-accent hover:text-white transition-all duration-300 dark:hover:bg-accent-hover"
+		className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-card text-text-muted hover:bg-accent-solid hover:text-white transition-all duration-300"
 	>
 		{children}
 		<span className="sr-only">{label}</span>
@@ -49,12 +49,12 @@ const Footer: FC = () => {
 	};
 
 	return (
-		<footer className="bg-page-bg border-t border-border pt-16 pb-8 transition-colors duration-300">
+		<footer className="bg-page-bg border-t border-border pt-14 pb-8 transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 scroll-reveal">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
 					{/* Marca y descripción */}
 					<div className="space-y-4">
-						<h2 className="text-2xl font-bold tracking-tight text-text-main">
+						<h2 className="text-xl font-bold tracking-tight text-text-main">
 							<span className="text-accent dark:text-accent-hover">Flux</span>
 							beats
 						</h2>
@@ -121,8 +121,8 @@ const Footer: FC = () => {
 
 					{/* Navegación */}
 					<div>
-						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
-							Navegaci&oacute;n
+						<h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
+							{t.footer.navigation}
 						</h3>
 						<ul className="space-y-3">
 							{[
@@ -145,8 +145,8 @@ const Footer: FC = () => {
 
 					{/* Enlaces legales */}
 					<div>
-						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
-							Legal
+						<h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
+							{t.footer.legalTitle}
 						</h3>
 						<ul className="space-y-3">
 							{[
@@ -167,7 +167,7 @@ const Footer: FC = () => {
 
 					{/* Newsletter */}
 					<div>
-						<h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-main">
+						<h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
 							{t.footer.newsletter.title}
 						</h3>
 						<form
@@ -183,19 +183,21 @@ const Footer: FC = () => {
 								}}
 								placeholder={t.footer.newsletter.placeholder}
 								required
-								className="w-full rounded-md border border-border px-3 py-2 text-sm placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent dark:bg-surface-card dark:text-text-main"
+								className="w-full rounded-none border-b border-border bg-transparent px-0 py-2.5 text-sm text-text-main placeholder:text-text-muted focus:border-accent focus:outline-none"
 							/>
 							{newsletterStatus === "error" && (
-								<p className="text-xs text-red-500">Email inválido</p>
+								<p className="text-xs text-red-500">
+									{t.footer.newsletter.invalid}
+								</p>
 							)}
 							{newsletterStatus === "success" && (
 								<p className="text-xs text-green-500">
-									¡Gracias por suscribirte!
+									{t.footer.newsletter.success}
 								</p>
 							)}
 							<button
 								type="submit"
-								className="w-full rounded-md bg-accent px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent-hover transition-colors"
+								className="inline-flex h-11 w-full items-center justify-center rounded-full bg-accent-solid px-4 text-sm font-semibold text-white transition-colors hover:bg-accent-solid-hover"
 							>
 								{t.footer.newsletter.button}
 							</button>
@@ -204,7 +206,7 @@ const Footer: FC = () => {
 				</div>
 
 				{/* Pie inferior */}
-				<div className="mt-12 border-t border-border/50 pt-8 flex flex-col items-center gap-6">
+				<div className="mt-14 border-t border-border pt-8 flex flex-col items-center gap-6">
 					<div className="flex flex-col items-center gap-4">
 						<p className="text-sm font-medium text-text-muted">
 							{t.footer.developedBy}{" "}
@@ -215,7 +217,7 @@ const Footer: FC = () => {
 								(tech) => (
 									<span
 										key={tech}
-										className="px-3 py-1 text-xs font-medium rounded-full border border-border bg-surface-card text-text-muted"
+										className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-text-muted"
 									>
 										{tech}
 									</span>

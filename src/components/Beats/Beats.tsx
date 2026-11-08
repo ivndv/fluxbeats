@@ -48,34 +48,37 @@ const BeatsSection: FC = () => {
 		<>
 			<section
 				id="beats"
-				className="bg-page-bg py-24 sm:py-32 border-t border-border/50"
+				className="bg-page-bg py-20 sm:py-28 border-t border-border"
 			>
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 					{/* Encabezado de la sección */}
-					<div className="flex items-center justify-between mb-12 scroll-reveal">
+					<div className="mb-10 flex items-end justify-between gap-6 scroll-reveal">
 						<div>
-							<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
+							<p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+								{t.beats.eyebrow}
+							</p>
+							<h2 className="mt-3 text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 								{t.beats.title}
 							</h2>
-							<p className="mt-2 text-lg leading-8 text-text-muted">
+							<p className="mt-2 text-base leading-7 text-text-muted">
 								{t.beats.subtitle}
 							</p>
 						</div>
 						{/* Botones de navegación */}
-						<div className="flex gap-4">
+						<div className="flex shrink-0 gap-2">
 							<button
 								type="button"
 								onClick={() => scroll("left")}
-								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-card transition-all hover:border-accent hover:text-accent active:scale-95"
-								aria-label="Anterior"
+								className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-muted transition-colors hover:border-accent hover:text-accent active:scale-95"
+								aria-label={t.beats.prev}
 							>
 								<ChevronLeft size={20} />
 							</button>
 							<button
 								type="button"
 								onClick={() => scroll("right")}
-								className="group flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface-card transition-all hover:border-accent hover:text-accent active:scale-95"
-								aria-label="Siguiente"
+								className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-text-muted transition-colors hover:border-accent hover:text-accent active:scale-95"
+								aria-label={t.beats.next}
 							>
 								<ChevronRight size={20} />
 							</button>
@@ -85,7 +88,7 @@ const BeatsSection: FC = () => {
 					{/* Lista horizontal de beats */}
 					<div
 						ref={scrollRef}
-						className="flex gap-8 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide px-2"
+						className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
 					>
 						{beats.map((beat) => (
 							<BeatCard

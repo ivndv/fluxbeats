@@ -44,16 +44,16 @@ const Header = () => {
 		<>
 			{/* Barra de navegación superior */}
 			<header
-				className={`fixed top-0 z-50 w-full transition-all duration-300 bg-page-bg/80 backdrop-blur-md ${
+				className={`fixed top-0 z-50 w-full border-b transition-all duration-300 ${
 					isScrolled
-						? "border-b border-border shadow-sm"
-						: "border-b border-transparent shadow-none"
+						? "border-border bg-page-bg/75 backdrop-blur-xl backdrop-saturate-50"
+						: "border-transparent bg-transparent"
 				}`}
 			>
 				<nav className="mx-auto max-w-7xl flex h-16 w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
 					{/* Logo */}
 					<div className="shrink-0 cursor-pointer">
-						<h1 className="text-2xl font-bold tracking-tight text-text-main">
+						<h1 className="text-xl font-bold tracking-tight text-text-main">
 							<span className="text-accent">Flux</span>
 							beats
 						</h1>
@@ -66,7 +66,7 @@ const Header = () => {
 								<a
 									key={item.href}
 									href={item.href}
-									className="text-sm font-medium text-text-muted transition-colors hover:text-accent hover:underline hover:decoration-2 hover:underline-offset-4"
+									className="text-sm font-medium text-text-muted transition-colors hover:text-text-main underline-offset-4 hover:underline"
 								>
 									{item.label}
 								</a>
@@ -78,7 +78,7 @@ const Header = () => {
 
 					{/* Selectores de idioma y tema */}
 					<div className="flex items-center gap-2 shrink-0">
-						<div className="hidden md:flex items-center gap-0">
+						<div className="hidden md:flex items-center gap-1">
 							<LanguageSelector />
 							<ThemeSelector />
 						</div>
@@ -87,8 +87,8 @@ const Header = () => {
 						<button
 							type="button"
 							onClick={toggleMenu}
-							className="text-text-muted hover:text-accent md:hidden p-2"
-							aria-label="Abrir menú"
+							className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-card/70 text-text-muted transition-colors hover:border-accent hover:text-accent"
+							aria-label={isMenuOpen ? t.header.closeMenu : t.header.openMenu}
 							aria-expanded={isMenuOpen}
 						>
 							{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -112,7 +112,7 @@ const Header = () => {
 								<a
 									href={item.href}
 									onClick={closeMenu}
-									className="block p-2 text-base font-medium text-text-muted transition-colors hover:bg-surface-card hover:text-accent rounded-md"
+									className="flex min-h-11 items-center rounded-md px-2 text-base font-medium text-text-muted transition-colors hover:bg-surface-card hover:text-accent"
 								>
 									{item.label}
 								</a>

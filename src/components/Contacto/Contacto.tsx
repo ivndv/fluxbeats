@@ -46,7 +46,7 @@ const Contacto = () => {
 			// 5. Captura el error y lo muestra al usuario
 			setStatus("error");
 			setErrorMessage(
-				error instanceof Error ? error.message : "Error al enviar el mensaje",
+				error instanceof Error ? error.message : t.contact.form.error,
 			);
 		}
 	};
@@ -64,56 +64,63 @@ const Contacto = () => {
 	return (
 		<section
 			id="contacto"
-			className="bg-page-bg py-24 sm:py-32 border-t border-border/50 transition-colors duration-300"
+			className="bg-page-bg py-20 sm:py-28 border-t border-border transition-colors duration-300"
 		>
 			<div className="mx-auto max-w-7xl px-6 lg:px-8">
-				<div className="grid grid-cols-1 gap-x-16 gap-y-14 lg:grid-cols-2 scroll-reveal">
+				<div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20 scroll-reveal">
 					{/* Información de contacto */}
 					<div className="flex flex-col justify-center">
-						<h2 className="text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
+						<p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+							{t.contact.eyebrow}
+						</p>
+						<h2 className="mt-3 text-3xl font-bold tracking-tight text-text-main sm:text-4xl">
 							{t.contact.title}
 						</h2>
-						<p className="mt-4 text-lg leading-8 text-text-muted">
+						<p className="mt-4 text-base leading-7 text-text-muted">
 							{t.contact.subtitle}
 						</p>
 
 						<div className="mt-8 space-y-6">
 							{/* Email */}
 							<div className="flex items-center gap-x-4">
-								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
-									<Mail size={24} />
+								<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
+									<Mail size={18} strokeWidth={1.8} />
 								</div>
-								<div className="text-base text-text-muted">
-									<span className="block font-semibold text-text-main">
+								<div>
+									<span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
 										{t.contact.email}
 									</span>
-									<span>contacto@fluxbeats.com</span>
+									<span className="text-base text-text-main">
+										contacto@fluxbeats.com
+									</span>
 								</div>
 							</div>
 
 							{/* Tiempo de respuesta */}
 							<div className="flex items-center gap-x-4">
-								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
-									<Clock size={24} />
+								<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
+									<Clock size={18} strokeWidth={1.8} />
 								</div>
-								<div className="text-base text-text-muted">
-									<span className="block font-semibold text-text-main">
+								<div>
+									<span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
 										{t.contact.response}
 									</span>
-									{t.contact.responseTime}
+									<span className="text-base text-text-muted">
+										{t.contact.responseTime}
+									</span>
 								</div>
 							</div>
 
 							{/* Redes sociales */}
 							<div className="flex items-center gap-x-4">
-								<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-muted text-accent ring-1 ring-accent/30 dark:bg-accent/10 dark:text-accent-hover dark:ring-accent/20">
-									<Share2 size={24} />
+								<div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
+									<Share2 size={18} strokeWidth={1.8} />
 								</div>
 								<div>
-									<span className="block font-semibold text-text-main text-base">
+									<span className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted">
 										{t.contact.follow}
 									</span>
-									<div className="flex gap-4 mt-1">
+									<div className="mt-1 flex gap-4">
 										<button
 											type="button"
 											className="text-sm font-medium text-text-muted hover:text-accent transition-colors flex items-center gap-1"
@@ -150,7 +157,7 @@ const Contacto = () => {
 					{/* Formulario de contacto */}
 					<form
 						onSubmit={handleSubmit}
-						className="rounded-xl border border-border bg-surface-card p-6 shadow-xl sm:p-8"
+						className="lg:border-l lg:border-border lg:pl-10"
 					>
 						{/* Mensaje de éxito */}
 						{status === "success" && (
@@ -169,7 +176,7 @@ const Contacto = () => {
 										/>
 									</svg>
 									<p className="ml-3 text-sm font-medium text-green-800 dark:text-green-300">
-										Mensaje enviado correctamente! Te responderemos pronto.
+										{t.contact.form.success}
 									</p>
 								</div>
 							</div>
@@ -203,7 +210,7 @@ const Contacto = () => {
 							<div className="sm:col-span-2">
 								<label
 									htmlFor="name"
-									className="block text-sm font-semibold leading-6 text-text-main"
+									className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted"
 								>
 									{t.contact.form.name}
 								</label>
@@ -219,7 +226,7 @@ const Contacto = () => {
 										onChange={handleChange}
 										disabled={status === "loading"}
 										autoComplete="name"
-										className="block w-full rounded-md border-0 px-3.5 py-2 text-text-main shadow-sm ring-1 ring-inset ring-border placeholder:text-text-muted focus:ring-2 focus:ring-inset focus:ring-accent sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-page-bg dark:ring-border"
+										className="block w-full rounded-none border-b border-border bg-transparent px-0 py-2.5 text-text-main placeholder:text-text-muted focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 									/>
 								</div>
 							</div>
@@ -227,9 +234,9 @@ const Contacto = () => {
 							<div className="sm:col-span-2">
 								<label
 									htmlFor="email"
-									className="block text-sm font-semibold leading-6 text-text-main"
+									className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted"
 								>
-									Email
+									{t.contact.form.email}
 								</label>
 								<div className="mt-2.5">
 									<input
@@ -241,7 +248,7 @@ const Contacto = () => {
 										onChange={handleChange}
 										disabled={status === "loading"}
 										autoComplete="email"
-										className="block w-full rounded-md border-0 px-3.5 py-2 text-text-main shadow-sm ring-1 ring-inset ring-border placeholder:text-text-muted focus:ring-2 focus:ring-inset focus:ring-accent sm:text-sm sm:leading-6 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-page-bg dark:ring-border"
+										className="block w-full rounded-none border-b border-border bg-transparent px-0 py-2.5 text-text-main placeholder:text-text-muted focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 									/>
 								</div>
 							</div>
@@ -249,9 +256,9 @@ const Contacto = () => {
 							<div className="sm:col-span-2">
 								<label
 									htmlFor="message"
-									className="block text-sm font-semibold leading-6 text-text-main"
+									className="block font-mono text-[11px] uppercase tracking-[0.16em] text-text-muted"
 								>
-									Mensaje
+									{t.contact.form.message}
 								</label>
 								<div className="mt-2.5">
 									<textarea
@@ -264,7 +271,7 @@ const Contacto = () => {
 										value={formData.message}
 										onChange={handleChange}
 										disabled={status === "loading"}
-										className="block w-full rounded-md border-0 px-3.5 py-2 text-text-main shadow-sm ring-1 ring-inset ring-border placeholder:text-text-muted focus:ring-2 focus:ring-inset focus:ring-accent sm:text-sm sm:leading-6 resize-none disabled:opacity-50 disabled:cursor-not-allowed dark:bg-page-bg dark:ring-border"
+										className="block w-full resize-none rounded-none border-b border-border bg-transparent px-0 py-2.5 text-text-main placeholder:text-text-muted focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 									/>
 								</div>
 							</div>
@@ -288,15 +295,15 @@ const Contacto = () => {
 							<button
 								type="submit"
 								disabled={status === "loading" || !formData.turnstileToken}
-								className="rounded-md bg-accent px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent transition-all w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+								className="inline-flex h-11 w-full items-center justify-center rounded-full bg-accent-solid px-6 text-sm font-semibold text-white transition-colors hover:bg-accent-solid-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								{status === "loading" ? (
 									<span className="flex items-center justify-center gap-2">
 										<LoaderCircle size={16} className="animate-spin" />
-										Enviando...
+										{t.contact.form.sending}
 									</span>
 								) : (
-									"Enviar Mensaje"
+									t.contact.form.submit
 								)}
 							</button>
 						</div>
